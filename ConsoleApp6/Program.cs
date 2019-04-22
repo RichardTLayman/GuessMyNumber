@@ -11,8 +11,7 @@ namespace ConsoleApp6
         static void Main(string[] args)
         {
             Bisection bi = new Bisection();
-            //bi.Game1(bi.tenCount);
-            bi.Game2(bi.thousandCount);
+            bi.Games();
         }
     }
 }

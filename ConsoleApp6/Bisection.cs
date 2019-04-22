@@ -16,7 +16,38 @@ namespace ConsoleApp6
         int last;
         int target;
         int guess;
-        int count = 0;
+        int count;
+
+        public void Games()
+        {
+            Console.WriteLine("Press 1 to implement the bisection algorithm:");
+            Console.WriteLine("Press 2 to guess a number chosen by the computer:");
+            //Console.WriteLine("Press 3 to have the computer guess bisection algorithm:");
+
+            int value = Convert.ToInt32(Console.ReadLine());
+
+            while (value != 1 || value != 2)
+            {
+                Console.WriteLine("Press 1 to implement the bisection algorithm:");
+                Console.WriteLine("Press 2 to guess a number chosen by the computer:");
+                //Console.WriteLine("Press 3 to have the computer guess bisection algorithm:");
+
+                value = Convert.ToInt32(Console.ReadLine());
+            }
+
+            switch (value)
+            {
+                case 1:
+                    Game1(tenCount);
+                    break;
+                case 2:
+                    Game2(thousandCount);
+                    break;
+                default:
+                    break;
+            }
+
+        }
 
         public void Game1(int[] array)
         {
@@ -39,20 +70,17 @@ namespace ConsoleApp6
             {
                 if (target == middle)
                 {
-                    Console.WriteLine($"Congrats! The target number was {target}.");
-                    
+                    Console.WriteLine($"Congrats! The target number was {target}.");            
                     break;
                 }
                 else if (target < middle)
                 {
-                    Console.WriteLine(middle);
                     Console.WriteLine("The target is smaller.");
                     last = middle - 1;
                     middle = (first + last) / 2;
                 }
                 else
                 {
-                    Console.WriteLine(middle);
                     Console.WriteLine("the target is higher.");
                     first = middle + 1;
                     middle = (first + last) / 2;
@@ -70,12 +98,24 @@ namespace ConsoleApp6
             last = array[array.Length - 1];
             middle = (first + last) / 2;
 
-            while (first <= middle)
-            {
-                if (target == middle)
-                {
-                    Console.WriteLine($"Congrats! The target number was {target}.");
+            count = 0;
 
+            while (guess != target)
+            {
+                count++;
+                Console.WriteLine($"Please select a number between {first} and {last}.");
+                guess = Convert.ToInt32(Console.ReadLine());
+
+                while (guess == 0 || guess < first || guess > last)
+                {
+                    Console.WriteLine($"Please select a number between {first} and {last}.");
+                    guess = Convert.ToInt32(Console.ReadLine());
+                }
+
+                if (target == guess)
+                {
+                    Console.WriteLine($"Congrats! You guessed the right number.");
+                    Console.WriteLine($"It took you {count} guesses.");
                     break;
                 }
                 else if (target < middle)
