@@ -9,6 +9,7 @@ namespace ConsoleApp6
     class Bisection
     {
         public int[] tenCount = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+        public int[] hundredCount = Enumerable.Range(1, 100).ToArray();
         public int[] thousandCount = Enumerable.Range(1, 1000).ToArray();
 
         int first;
@@ -22,15 +23,16 @@ namespace ConsoleApp6
         {
             Console.WriteLine("Press 1 to implement the bisection algorithm:");
             Console.WriteLine("Press 2 to guess a number chosen by the computer:");
-            //Console.WriteLine("Press 3 to have the computer guess bisection algorithm:");
+            Console.WriteLine("Press 3 to have the computer guess bisection algorithm:");
 
             int value = Convert.ToInt32(Console.ReadLine());
 
-            while (value != 1 && value != 2)
+            while (value != 1 && value != 2 && value != 3)
             {
+                Console.Clear();
                 Console.WriteLine("Press 1 to implement the bisection algorithm:");
                 Console.WriteLine("Press 2 to guess a number chosen by the computer:");
-                //Console.WriteLine("Press 3 to have the computer guess bisection algorithm:");
+                Console.WriteLine("Press 3 to have the computer guess bisection algorithm:");
 
                 value = Convert.ToInt32(Console.ReadLine());
             }
@@ -42,6 +44,9 @@ namespace ConsoleApp6
                     break;
                 case 2:
                     Game2(thousandCount);
+                    break;
+                case 3:
+                    Game3(hundredCount);
                     break;
                 default:
                     break;
@@ -119,6 +124,53 @@ namespace ConsoleApp6
                     break;
                 }
                 else if (target < middle)
+                {
+                    Console.WriteLine("The target number is smaller. Try again.");
+                    last = middle - 1;
+                    middle = (first + last) / 2;
+                }
+                else
+                {
+                    Console.WriteLine("The target number is higher. Try again.");
+                    first = middle + 1;
+                    middle = (first + last) / 2;
+                }
+                Console.ReadKey();
+            }
+        }
+
+        public void Game3(int[] array)
+        {
+            Random rand = new Random();
+
+            first = array[0];
+            last = array[array.Length - 1];
+            middle = (first + last) / 2;
+
+            count = 0;
+
+            Console.WriteLine("Please select a number between 1 and 100 for the computer to guess.");
+            target = Convert.ToInt32(Console.ReadLine());
+
+            while (target <= 0 || target > 100)
+            {
+                Console.WriteLine($"Please select a number between 1 and 100.");
+                target = Convert.ToInt32(Console.ReadLine());
+            }
+
+            Console.WriteLine($"The target number you chose was {target}.");
+
+            while (guess != target)
+            {
+                count++;
+
+
+                if (guess == target)
+                {
+                    Console.WriteLine($"The computer took {count} guesses.");
+                    break;
+                }
+                else if (target < guess)
                 {
                     Console.WriteLine("The target number is smaller. Try again.");
                     last = middle - 1;
