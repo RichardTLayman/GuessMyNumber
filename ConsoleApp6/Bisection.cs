@@ -26,7 +26,7 @@ namespace ConsoleApp6
 
             int value = Convert.ToInt32(Console.ReadLine());
 
-            while (value != 1 || value != 2)
+            while (value != 1 && value != 2)
             {
                 Console.WriteLine("Press 1 to implement the bisection algorithm:");
                 Console.WriteLine("Press 2 to guess a number chosen by the computer:");
@@ -120,15 +120,13 @@ namespace ConsoleApp6
                 }
                 else if (target < middle)
                 {
-                    Console.WriteLine(middle);
-                    Console.WriteLine("The target is smaller.");
+                    Console.WriteLine("The target number is smaller. Try again.");
                     last = middle - 1;
                     middle = (first + last) / 2;
                 }
                 else
                 {
-                    Console.WriteLine(middle);
-                    Console.WriteLine("the target is higher.");
+                    Console.WriteLine("The target number is higher. Try again.");
                     first = middle + 1;
                     middle = (first + last) / 2;
                 }
